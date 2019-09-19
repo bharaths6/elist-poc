@@ -5,12 +5,11 @@ import { fetchAllUsers } from '../actions/UserActions'
 import { selectUserInfo } from '../selectors/userSelector';
 
 const mapStateToProps = state => ({
-    // sideeffect ???
     userInfo: selectUserInfo(state)
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: () => {
+    fetchAllUsers: () => {
         dispatch(fetchAllUsers(ownProps))
     }
   })

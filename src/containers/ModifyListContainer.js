@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: () => {
+    fetchUserInfo: () => {
         dispatch(fetchUserInfo(ownProps))
     }
   })

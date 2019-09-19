@@ -12,7 +12,7 @@ function App() {
       <div className="App-intro">
           <Switch>
             <Route exact path="/"  component={HomePageContainer} />
-            <Route path="/modify-list" component={ModifyListContainer} />
+            <Route path="/modify-list/:id" component={ModifyListContainer} />
             <Redirect to="/" />
           </Switch>
         </div>
