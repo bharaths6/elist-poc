@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
+
+import HomePageContainer from './containers/HomePageContainers';
+import ModifyListContainer from './containers/ModifyListContainer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App">      
+      {/* <HomePageContainer/> */}
+      <div className="App-intro">
+          <Switch>
+            <Route exact path="/"  component={HomePageContainer} />
+            <Route path="/modify-list" component={ModifyListContainer} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
     </div>
   );
 }
