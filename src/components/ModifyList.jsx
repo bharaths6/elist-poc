@@ -15,6 +15,7 @@ class ModifyList extends React.Component {
 
   render() {
     const { userInfo } = this.props;
+    debugger;
     return (
       <div className="List">
         Modify List
