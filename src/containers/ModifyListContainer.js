@@ -1,22 +1,21 @@
-import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-import ModifyList from '../components/ModifyList'
+import { connect } from 'react-redux';
+import ModifyList from '../components/ModifyList';
 import { fetchUserInfo } from '../actions/UserActions';
-import { selectUserInfo } from '../selectors/userSelector'
 
-const mapStateToProps = state => ({
-    userInfo: selectUserInfo(state)
-})
+const mapStateToProps = (state, props) => ({
+  userInfo: state,
+  empId: props.match.params.id,
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetchUserInfo: () => {
-        dispatch(fetchUserInfo(ownProps))
-    }
-  })
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchUserInfo: () => {
+    dispatch(fetchUserInfo(props.match.params.id));
+  },
+});
 
 const ModifyListContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(ModifyList)
+  mapDispatchToProps,
+)(ModifyList);
 
-export default ModifyListContainer
+export default ModifyListContainer;

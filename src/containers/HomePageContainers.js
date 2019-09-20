@@ -1,22 +1,20 @@
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux'
 import HomePage from '../components/HomePage';
-import { fetchAllUsers } from '../actions/UserActions'
-import { selectUserInfo } from '../selectors/userSelector';
+import { fetchAllUsers } from '../actions/UserActions';
 
-const mapStateToProps = state => ({
-    userInfo: selectUserInfo(state)
-})
+const mapStateToProps = (state) => ({
+  userInfo: state.users,
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetchAllUsers: () => {
-        dispatch(fetchAllUsers(ownProps))
-    }
-  })
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllUsers: () => {
+    dispatch(fetchAllUsers());
+  },
+});
 
 const HomePageContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(HomePage)
+  mapDispatchToProps,
+)(HomePage);
 
-export default HomePageContainer
+export default HomePageContainer;
