@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 class HomePage extends React.Component {
   componentDidMount() {
     const { fetchAllUsers } = this.props;
-    debugger;
     fetchAllUsers();
   }
 

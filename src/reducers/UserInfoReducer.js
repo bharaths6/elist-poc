@@ -19,7 +19,6 @@ export default function users(prevState = initialState, action) {
   let state = prevState;
   switch (action.type) {
     case FETCH_ALL_USERS_SUCCEEDED:
-      debugger;
       state = action.userList;
       return state;
     case FETCH_USER_INFO_SUCCEEDED:
