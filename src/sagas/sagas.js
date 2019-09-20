@@ -1,56 +1,68 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import {
-  FETCH_ALL_USERS,
-  FETCH_ALL_USERS_SUCCEEDED,
-  FETCH_ALL_USERS_FAILED,
-  FETCH_USER_INFO,
-} from '../constants/ActionTypes';
-// import Api from '...'
-const userList = [{
-  id: '12',
-  name: 'BHS',
-  exp: '6yrs',
-  designation: 'ITA',
-  skillset: 'React, Redux, ES6',
-}, {
-  id: '13',
-  name: 'SHB',
-  exp: '2yrs',
-  designation: 'SE',
-  skillset: 'Angular',
-}];
+  call, put, takeEvery, fork,
+} from 'redux-saga/effects';
 
-function* fetchAllUsers(action) {
+import * as actionType from '../constants/ActionTypes';
+
+import {
+  getLocalStorage, addLocalStorage, updateLocalStorage, deleteLocalStorage,
+} from '../localStorage';
+
+function* createUserInfo(action) {
   try {
-    // const user = yield fetch('https://jsonplaceholder.typicode.com/todos/1').then((res) => res.json());
-    yield put({ type: FETCH_ALL_USERS_SUCCEEDED, userList });
+    const userList = addLocalStorage(action.info);
+    yield put({ type: actionType.CREATE_USER_INFO_SUCCEEDED, userList });
   } catch (e) {
-    yield put({ type: FETCH_ALL_USERS_FAILED, message: e.message });
+    yield put({ type: actionType.CREATE_USER_INFO_FAILED, message: e.message });
   }
 }
 
-function* fetchUsersInfo(action, id) {
-  debugger;
+function* fetchAllUsers() {
   try {
-    const userInfo = userList.find( (user) => {
-      debugger;
-      return user.id === id;
-    });
-    yield put({ type: FETCH_ALL_USERS_SUCCEEDED, userList });
+    const userList = getLocalStorage();
+    yield put({ type: actionType.FETCH_ALL_USERS_SUCCEEDED, userList });
   } catch (e) {
-    yield put({ type: FETCH_ALL_USERS_FAILED, message: e.message });
+    yield put({ type: actionType.FETCH_ALL_USERS_FAILED, message: e.message });
   }
+}
+
+function* updateUserInfo(action) {
+  try {
+    const userList = updateLocalStorage(action.info);
+    yield put({ type: actionType.UPDATE_USER_INFO_SUCCEEDED, userList });
+  } catch (e) {
+    yield put({ type: actionType.UPDATE_USER_INFO_FAILED, message: e.message });
+  }
+}
+
+function* deleteUserById(action) {
+  try {
+    const userList = deleteLocalStorage(action.id);
+    yield put({ type: actionType.DELETE_USER_BY_ID_SUCCEEDED, userList });
+  } catch (e) {
+    yield put({ type: actionType.DELETE_USER_BY_ID_FAILED, message: e.message });
+  }
+}
+
+function* createUserInfoSaga() {
+  yield takeEvery(actionType.CREATE_USER_INFO, createUserInfo);
 }
 
 function* fetchAllUsersSaga() {
-  yield takeEvery(FETCH_ALL_USERS, fetchAllUsers);
+  yield takeEvery(actionType.FETCH_ALL_USERS, fetchAllUsers);
 }
 
-function* fetchUsersInfoSaga() {
-  yield takeEvery(FETCH_USER_INFO, fetchUsersInfo);
+function* updateUserInfoSaga() {
+  yield takeEvery(actionType.UPDATE_USER_INFO, updateUserInfo);
 }
 
-export default [
-  fetchAllUsersSaga,
-  fetchUsersInfoSaga,
-];
+function* deleteUserByIdSaga() {
+  yield takeEvery(actionType.DELETE_USER_BY_ID, deleteUserById);
+}
+
+export default function* rootSaga() {
+  yield fork(createUserInfoSaga);
+  yield fork(fetchAllUsersSaga);
+  yield fork(updateUserInfoSaga);
+  yield fork(deleteUserByIdSaga);
+}

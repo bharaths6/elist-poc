@@ -8,10 +8,20 @@ class HomePage extends React.Component {
     fetchAllUsers();
   }
 
+  deleteUser(userId) {
+    const confirmDelete = window.confirm('Are you sure you want to delete ?');
+    if (confirmDelete) {
+      const { deleteUserById } = this.props;
+      deleteUserById(userId);
+    }
+  }
+
   render() {
     const { userInfo } = this.props;
     return (
       <div className="HomePage">
+        <Link to={{ pathname: '/modify-list/' }}> Create </Link>
+
         {userInfo.map((user) => (
           <React.Fragment key={user.id}>
             <div>{user.id}</div>
@@ -20,6 +30,7 @@ class HomePage extends React.Component {
             <div>{user.exp}</div>
             <div>{user.skillset}</div>
             <Link to={{ pathname: `/modify-list/${user.id}` }}> Edit </Link>
+            <button type="button" onClick={() => this.deleteUser(user.id)}>Delete</button>
           </React.Fragment>
         ))}
 
@@ -35,6 +46,7 @@ HomePage.defaultProps = {
 HomePage.propTypes = {
   userInfo: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   fetchAllUsers: PropTypes.func.isRequired,
+  deleteUserById: PropTypes.func.isRequired,
 };
 
 export default HomePage;

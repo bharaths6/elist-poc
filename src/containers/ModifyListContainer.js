@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import ModifyList from '../components/ModifyList';
-import { fetchUserInfo } from '../actions/UserActions';
+import { updateUserInfo, createUserInfo } from '../actions/UserActions';
 
-// const mapStateToProps = (state, props) => ({
-//   userInfo: state.users.find((user) => {
-//     debugger;
-//     return user.id === props.match.params.id;
-//   }),
-//   empId: props.match.params.id,
-// });
+const mapStateToProps = (state, props) => ({
+  userInfo: state.users.find((user) => user.id === props.match.params.id),
+});
 
-const mapDispatchToProps = (dispatch, props) => ({
-  fetchUserInfo: () => {
-    dispatch(fetchUserInfo(props.match.params.id));
+const mapDispatchToProps = (dispatch) => ({
+  updateUserInfo: (userInfo) => {
+    dispatch(updateUserInfo(userInfo));
+  },
+  createUserInfo: (userInfo) => {
+    dispatch(createUserInfo(userInfo));
   },
 });
+
 
 const ModifyListContainer = connect(
   mapStateToProps,
