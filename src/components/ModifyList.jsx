@@ -1,35 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import EditForm from './EditForm';
 
-class ModifyList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.userInfo = [];
+function ModifyList({ userInfo, updateUserInfo, createUserInfo }) {
+  if (Object.keys(userInfo).length) {
+    return <EditForm info={userInfo} userAction={updateUserInfo} />;
   }
 
-  componentDidMount() {
-    const { fetchUserInfo, empId } = this.props;
-    fetchUserInfo(empId);
-  }
-
-  render() {
-    const { userInfo } = this.props;
-    return (
-      <div className="List">
-        Modify List
-
-        <>
-          <div>{userInfo.name}</div>
-          <div>{userInfo.designation}</div>
-          <div>{userInfo.exp}</div>
-        </>
-
-        <Link to="/">Home</Link>
-
-      </div>
-    );
-  }
+  return <EditForm userAction={createUserInfo} />;
 }
 
 ModifyList.defaultProps = {
@@ -37,9 +15,9 @@ ModifyList.defaultProps = {
 };
 
 ModifyList.propTypes = {
+  updateUserInfo: PropTypes.func.isRequired,
+  createUserInfo: PropTypes.func.isRequired,
   userInfo: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  empId: PropTypes.string.isRequired,
-  fetchUserInfo: PropTypes.func.isRequired,
 };
 
 export default ModifyList;
