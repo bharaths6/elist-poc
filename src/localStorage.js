@@ -1,18 +1,16 @@
-import { isTSExpressionWithTypeArguments } from "@babel/types";
-
 const key = 'userList';
 const initUserList = [{
-  id: '12',
-  name: 'BHS',
+  id: '1001',
+  name: 'User 01',
   exp: '6yrs',
   designation: 'ITA',
   skillset: 'React, Redux, ES6',
 }, {
-  id: '13',
-  name: 'SHB',
+  id: '1003',
+  name: 'User 03',
   exp: '2yrs',
   designation: 'SE',
-  skillset: 'Angular',
+  skillset: 'Angular, JAVA',
 }];
 
 const initLocalStorage = (list) => {

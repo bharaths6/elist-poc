@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+
 class EditForm extends React.Component {
-// const SimpleForm = (props) => {
-  // const { handleSubmit, info } = props;
   constructor(props) {
     super(props);
     const initInfo = {
@@ -20,6 +23,7 @@ class EditForm extends React.Component {
     const { userAction } = this.props;
     userAction(this.state);
     e.preventDefault();
+    window.history.go(-1);
   }
 
   render() {
@@ -29,51 +33,58 @@ class EditForm extends React.Component {
 
     return (
       <form>
-          Name
         <div>
-          <input
-            name="Name"
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => this.handleChange('name', e.target.value)}
-          />
+          <FormControl>
+            <InputLabel htmlFor="my-input">Name</InputLabel>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              value={name}
+              onChange={(e) => this.handleChange('name', e.target.value)}
+            />
+          </FormControl>
         </div>
-          Experience
         <div>
-          <input
-            name="experience"
-            type="text"
-            placeholder="Experience"
-            value={exp}
-            onChange={(e) => this.handleChange('exp', e.target.value)}
-          />
+          <FormControl>
+            <InputLabel htmlFor="my-input">Experience</InputLabel>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              value={exp}
+              onChange={(e) => this.handleChange('exp', e.target.value)}
+            />
+          </FormControl>
         </div>
-          Designation
         <div>
-          <input
-            name="designation"
-            type="text"
-            placeholder="Designation"
-            value={designation}
-            onChange={(e) => this.handleChange('designation', e.target.value)}
-          />
+          <FormControl>
+            <InputLabel htmlFor="my-input">Designation</InputLabel>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              value={designation}
+              onChange={(e) => this.handleChange('designation', e.target.value)}
+            />
+          </FormControl>
         </div>
-          Skillset
         <div>
-          <input
-            name="skillset"
-            type="text"
-            placeholder="Skillset"
-            value={skillset}
-            onChange={(e) => this.handleChange('skillset', e.target.value)}
-          />
+          <FormControl>
+            <InputLabel htmlFor="my-input">Skillset</InputLabel>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              value={skillset}
+              onChange={(e) => this.handleChange('skillset', e.target.value)}
+            />
+          </FormControl>
         </div>
-
         <div>
-          <button type="button" onClick={(e) => this.handleUpdate(e)}>
-            Submit
-          </button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(e) => this.handleUpdate(e)}
+          >
+            Save
+          </Button>
         </div>
       </form>
     );
@@ -89,6 +100,3 @@ EditForm.propTypes = {
 };
 
 export default EditForm;
-// export default reduxForm({
-//   form: 'simple', // a unique identifier for this form
-// })(SimpleForm);

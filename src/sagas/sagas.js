@@ -1,11 +1,11 @@
-import {
-  call, put, takeEvery, fork,
-} from 'redux-saga/effects';
-
+import { put, takeEvery, fork } from 'redux-saga/effects';
 import * as actionType from '../constants/ActionTypes';
 
 import {
-  getLocalStorage, addLocalStorage, updateLocalStorage, deleteLocalStorage,
+  getLocalStorage,
+  addLocalStorage,
+  updateLocalStorage,
+  deleteLocalStorage,
 } from '../localStorage';
 
 function* createUserInfo(action) {

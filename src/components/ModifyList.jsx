@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import EditForm from './EditForm';
 
 function ModifyList({ userInfo, updateUserInfo, createUserInfo }) {
-  debugger;
   if (Object.keys(userInfo).length) {
     return <EditForm info={userInfo} userAction={updateUserInfo} />;
   }
